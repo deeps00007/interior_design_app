@@ -1,0 +1,65 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    
+    function isOwner(uid) {
+      return isSignedIn() && request.auth.uid == uid;
+    }
+    
+    function isUserOwnerRole() {
+      return isSignedIn() && 
+             get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'owner';
+    }
+    
+    // Properties collection
+    match /properties/{propertyId} {
+      // Anyone can read properties
+      allow read: if true;
+      
+      // Only authenticated owner users can create/update properties
+      allow create: if isSignedIn() && isUserOwnerRole();
+      allow update: if isSignedIn() && isUserOwnerRole();
+      
+      // Only property owner can delete
+      allow delete: if isSignedIn() && 
+                      resource.data.ownerId == request.auth.uid;
+    }
+    
+    // Users collection
+    match /users/{userId} {
+      // Users can read their own data
+      allow read: if isOwner(userId);
+      
+      // Users can create/update their own data
+      allow create, update: if isOwner(userId);
+      
+      // Only user can delete their own data
+      allow delete: if isOwner(userId);
+    }
+    
+    // Notifications collection
+    match /notifications/{notificationId} {
+      // Users can read notifications for them
+      allow read: if isSignedIn() && 
+                    resource.data.userId == request.auth.uid;
+      
+      // Only server/admin can create notifications (via backend)
+      // For now, allowing authenticated users to create
+      allow create: if isSignedIn();
+      
+      // Users can update their own notifications (e.g., mark as read)
+      allow update: if isSignedIn() && 
+                      resource.data.userId == request.auth.uid;
+      
+      // Users can delete their own notifications
+      allow delete: if isSignedIn() && 
+                      resource.data.userId == request.auth.uid;
+    }
+  }
+}

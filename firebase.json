@@ -1,1 +1,27 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"interioe-design-app","appId":"1:146070702348:android:81043f119e8a8059252129","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"interioe-design-app","configurations":{"android":"1:146070702348:android:81043f119e8a8059252129","ios":"1:146070702348:ios:2bd6c27ae29262e1252129","web":"1:146070702348:web:10513e74a06bfe52252129"}}}}}}
+{
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "interioe-design-app",
+          "appId": "1:146070702348:android:81043f119e8a8059252129",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "interioe-design-app",
+          "configurations": {
+            "android": "1:146070702348:android:81043f119e8a8059252129",
+            "ios": "1:146070702348:ios:2bd6c27ae29262e1252129",
+            "web": "1:146070702348:web:10513e74a06bfe52252129"
+          }
+        }
+      }
+    }
+  }
+}
