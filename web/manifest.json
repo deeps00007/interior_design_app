@@ -1,6 +1,6 @@
 {
-    "name": "real_estate_owner_app",
-    "short_name": "real_estate_owner_app",
+    "name": "interior_design_app",
+    "short_name": "interior_design_app",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
