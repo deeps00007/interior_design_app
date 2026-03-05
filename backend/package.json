@@ -1,5 +1,5 @@
 {
-  "name": "real-estate-notification-server",
+  "name": "interior-design-notification-server",
   "version": "1.0.0",
   "description": "Backend for sending push notifications via Firebase",
   "main": "index.js",
