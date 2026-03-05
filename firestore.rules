@@ -33,8 +33,8 @@ service cloud.firestore {
     
     // Users collection
     match /users/{userId} {
-      // Users can read their own data
-      allow read: if isOwner(userId);
+      // Users can read their own data, OR owners can read all users (for broadcast)
+      allow read: if isOwner(userId) || isUserOwnerRole();
       
       // Users can create/update their own data
       allow create, update: if isOwner(userId);
