@@ -14,7 +14,7 @@ class DesignProject extends Equatable {
   final String? ownerPhotoUrl; // Added
 
   final int roomCount;
-  final int style;
+  final String style;
   final double budget;
   final bool isCompleted;
   final String designerName;
@@ -34,7 +34,7 @@ class DesignProject extends Equatable {
     this.ownerPhotoUrl, // Added
     this.address,
     this.roomCount = 0,
-    this.style = 0,
+    this.style = 'Modern',
     this.budget = 0.0,
     this.isCompleted = false,
     this.designerName = '',
@@ -54,12 +54,12 @@ class DesignProject extends Equatable {
     String? ownerId,
     String? ownerPhotoUrl, // Added
     String? address,
-    int? beds,
-    int? baths,
-    double? sqft,
-    bool? hasKitchen,
-    String? agentName,
-    String? agentPhone,
+    int? roomCount,
+    String? style,
+    double? budget,
+    bool? isCompleted,
+    String? designerName,
+    String? designerPhone,
     List<String>? gallery,
   }) => DesignProject(
     id: id ?? this.id,
@@ -73,12 +73,12 @@ class DesignProject extends Equatable {
     ownerId: ownerId ?? this.ownerId,
     ownerPhotoUrl: ownerPhotoUrl ?? this.ownerPhotoUrl, // Added
     address: address ?? this.address,
-    roomCount: beds ?? this.roomCount,
-    style: baths ?? this.style,
-    budget: sqft ?? this.budget,
-    isCompleted: hasKitchen ?? this.isCompleted,
-    designerName: agentName ?? this.designerName,
-    designerPhone: agentPhone ?? this.designerPhone,
+    roomCount: roomCount ?? this.roomCount,
+    style: style ?? this.style,
+    budget: budget ?? this.budget,
+    isCompleted: isCompleted ?? this.isCompleted,
+    designerName: designerName ?? this.designerName,
+    designerPhone: designerPhone ?? this.designerPhone,
     gallery: gallery ?? this.gallery,
   );
 
