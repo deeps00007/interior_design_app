@@ -15,7 +15,13 @@ class RotatingSearchBar extends StatefulWidget {
 
 class _RotatingSearchBarState extends State<RotatingSearchBar>
     with SingleTickerProviderStateMixin {
-  final List<String> _keywords = ["Living Room", "Kitchen", "Office", "Bedroom", "Minimalist"];
+  final List<String> _keywords = [
+    "Living Room",
+    "Kitchen",
+    "Office",
+    "Bedroom",
+    "Minimalist",
+  ];
   late final List<String> _loopList;
 
   final TextEditingController _controller = TextEditingController();
