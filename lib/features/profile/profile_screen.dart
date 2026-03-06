@@ -114,7 +114,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   _buildSectionHeader('Owner Tools'),
                   _buildListTile(
                     icon: Icons.home_work_outlined,
-                    title: 'My Properties',
+                    title: 'My Projects',
                     subtitle: 'Manage your listings',
                     onTap: () {
                       Navigator.push(
@@ -151,7 +151,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         _buildSectionHeader('My Activity'),
                         _buildListTile(
                           icon: Icons.favorite_border,
-                          title: 'Saved Properties',
+                          title: 'Saved Projects',
                           subtitle:
                               '${propertyState.savedPropertyIds.length} items',
                           onTap: () {
@@ -159,7 +159,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => ActivityListScreen(
-                                  title: 'Saved Properties',
+                                  title: 'Saved Projects',
                                   propertyIds: propertyState.savedPropertyIds,
                                 ),
                               ),
@@ -220,7 +220,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   'Q: How do I update my profile?\n'
                                   'A: Tap the edit icon on your profile picture to update your personal details.\n\n'
                                   'Q: Can I switch to an owner account?\n'
-                                  'A: Yes, please contact support to upgrade your account status to list properties.',
+                                  'A: Yes, please contact support to upgrade your account status to list projects.',
                             ),
                             ContentSection(
                               title: 'Contact Support',

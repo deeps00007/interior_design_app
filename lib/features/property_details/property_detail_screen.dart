@@ -315,7 +315,7 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
                                 Text(
                                   property.designerName.isNotEmpty
                                       ? property.designerName
-                                      : 'Listing Agent',
+                                      : 'Designer',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16,
@@ -600,7 +600,7 @@ class _PropertyDetailScreenState extends State<PropertyDetailScreen> {
               currentUserId: user.uid,
               otherUserName: widget.property.designerName.isNotEmpty
                   ? widget.property.designerName
-                  : 'Listing Agent',
+                  : 'Designer',
               otherUserId: ownerId,
               currentUserName: user.displayName ?? 'User',
             ),

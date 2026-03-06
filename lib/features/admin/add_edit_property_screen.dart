@@ -29,12 +29,12 @@ class _AddEditPropertyScreenState extends State<AddEditPropertyScreen> {
   late TextEditingController _addressController;
   late TextEditingController _imageUrlController;
   late TextEditingController _typeController;
-  late TextEditingController _bedsController;
-  late TextEditingController _bathsController;
-  late TextEditingController _sqftController;
-  late TextEditingController _agentNameController;
-  late TextEditingController _agentPhoneController;
-  bool _hasKitchen = false;
+  late TextEditingController _roomsController;
+  late TextEditingController _styleController;
+  late TextEditingController _budgetController;
+  late TextEditingController _designerNameController;
+  late TextEditingController _designerPhoneController;
+  bool _isCompleted = false;
   List<String> _galleryUrls = [];
   List<File> _galleryFiles = [];
 
@@ -59,24 +59,24 @@ class _AddEditPropertyScreenState extends State<AddEditPropertyScreen> {
       text: widget.property?.imageUrl ?? '',
     );
     _typeController = TextEditingController(
-      text: widget.property?.type ?? 'Apartment',
+      text: widget.property?.type ?? 'Living Room',
     );
-    _bedsController = TextEditingController(
+    _roomsController = TextEditingController(
       text: widget.property?.roomCount.toString() ?? '0',
     );
-    _bathsController = TextEditingController(
-      text: widget.property?.style.toString() ?? '0',
+    _styleController = TextEditingController(
+      text: widget.property?.style.toString() ?? 'Modern',
     );
-    _sqftController = TextEditingController(
+    _budgetController = TextEditingController(
       text: widget.property?.budget.toString() ?? '0.0',
     );
-    _agentNameController = TextEditingController(
+    _designerNameController = TextEditingController(
       text: widget.property?.designerName ?? '',
     );
-    _agentPhoneController = TextEditingController(
+    _designerPhoneController = TextEditingController(
       text: widget.property?.designerPhone ?? '',
     );
-    _hasKitchen = widget.property?.isCompleted ?? false;
+    _isCompleted = widget.property?.isCompleted ?? false;
     _galleryUrls = List.from(widget.property?.gallery ?? []);
 
     if (widget.isEdit) {
@@ -92,11 +92,11 @@ class _AddEditPropertyScreenState extends State<AddEditPropertyScreen> {
     _addressController.dispose();
     _imageUrlController.dispose();
     _typeController.dispose();
-    _bedsController.dispose();
-    _bathsController.dispose();
-    _sqftController.dispose();
-    _agentNameController.dispose();
-    _agentPhoneController.dispose();
+    _roomsController.dispose();
+    _styleController.dispose();
+    _budgetController.dispose();
+    _designerNameController.dispose();
+    _designerPhoneController.dispose();
     super.dispose();
   }
 
@@ -192,9 +192,9 @@ class _AddEditPropertyScreenState extends State<AddEditPropertyScreen> {
       }
 
       final double price = double.tryParse(_priceController.text) ?? 0.0;
-      final int beds = int.tryParse(_bedsController.text) ?? 0;
-      final int baths = int.tryParse(_bathsController.text) ?? 0;
-      final double sqft = double.tryParse(_sqftController.text) ?? 0.0;
+      final int rooms = int.tryParse(_roomsController.text) ?? 0;
+      final String style = _styleController.text;
+      final double budget = double.tryParse(_budgetController.text) ?? 0.0;
 
       final property = DesignProject(
         id: widget.isEdit
@@ -210,15 +210,15 @@ class _AddEditPropertyScreenState extends State<AddEditPropertyScreen> {
         ownerId: ownerId,
         ownerPhotoUrl: context.read<AuthBloc>().state.user?.photoURL, // Added
         address: _addressController.text,
-        roomCount: beds,
-        style: baths,
-        budget: sqft,
-        isCompleted: _hasKitchen,
-        designerName: _agentNameController.text.isNotEmpty
-            ? _agentNameController.text
+        roomCount: rooms,
+        style: style, // Convert to string for design style
+        budget: budget,
+        isCompleted: _isCompleted,
+        designerName: _designerNameController.text.isNotEmpty
+            ? _designerNameController.text
             : (context.read<AuthBloc>().state.user?.displayName ??
-                  'Listing Agent'), // Auto-fill name
-        designerPhone: _agentPhoneController.text,
+                  'Designer'), // Auto-fill name
+        designerPhone: _designerPhoneController.text,
         gallery: finalGallery,
       );
 
@@ -369,7 +369,7 @@ class _AddEditPropertyScreenState extends State<AddEditPropertyScreen> {
             const SizedBox(height: 24),
 
             const Text(
-              'Amenities & Details',
+              'Project Details',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
@@ -377,17 +377,16 @@ class _AddEditPropertyScreenState extends State<AddEditPropertyScreen> {
               children: [
                 Expanded(
                   child: _buildTextField(
-                    'Beds',
-                    _bedsController,
+                    'Rooms',
+                    _roomsController,
                     isNumber: true,
                   ),
                 ),
                 const SizedBox(width: 16),
                 Expanded(
                   child: _buildTextField(
-                    'Baths',
-                    _bathsController,
-                    isNumber: true,
+                    'Style (e.g. Modern)',
+                    _styleController,
                   ),
                 ),
               ],
@@ -397,17 +396,17 @@ class _AddEditPropertyScreenState extends State<AddEditPropertyScreen> {
               children: [
                 Expanded(
                   child: _buildTextField(
-                    'Area (sqft)',
-                    _sqftController,
+                    'Budget',
+                    _budgetController,
                     isNumber: true,
                   ),
                 ),
                 const SizedBox(width: 16),
                 Expanded(
                   child: SwitchListTile(
-                    title: const Text('Kitchen'),
-                    value: _hasKitchen,
-                    onChanged: (val) => setState(() => _hasKitchen = val),
+                    title: const Text('Completed'),
+                    value: _isCompleted,
+                    onChanged: (val) => setState(() => _isCompleted = val),
                     contentPadding: EdgeInsets.zero,
                   ),
                 ),
@@ -416,17 +415,13 @@ class _AddEditPropertyScreenState extends State<AddEditPropertyScreen> {
 
             const SizedBox(height: 24),
             const Text(
-              'Listing Agent',
+              'Designer Info',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
-            _buildTextField('Agent Name', _agentNameController),
+            _buildTextField('Designer Name', _designerNameController),
             const SizedBox(height: 16),
-            _buildTextField(
-              'Agent Phone',
-              _agentPhoneController,
-              isNumber: true,
-            ),
+            _buildTextField('Designer Phone', _designerPhoneController),
 
             const SizedBox(height: 24),
 

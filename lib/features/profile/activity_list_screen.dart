@@ -62,7 +62,7 @@ class ActivityListScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    'No properties found',
+                    'No projects found',
                     style: TextStyle(color: Colors.grey[600], fontSize: 16),
                   ),
                 ],

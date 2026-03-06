@@ -18,7 +18,7 @@ class MyPropertiesScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My Properties'),
+        title: const Text('My Projects'),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         elevation: 0,
@@ -45,7 +45,7 @@ class MyPropertiesScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    'No properties listed yet.',
+                    'No projects listed yet.',
                     style: TextStyle(color: Colors.grey[600], fontSize: 16),
                   ),
                 ],

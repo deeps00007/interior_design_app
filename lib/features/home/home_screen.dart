@@ -197,10 +197,10 @@ class HomeScreen extends StatelessWidget {
   //               enabledBorder: InputBorder.none,
   //               focusedBorder: InputBorder.none,
   //               disabledBorder: InputBorder.none,
-  //               filled: false, // 🔥 Important
+  //               filled: false, // ðŸ”¥ Important
   //               isDense: true,
   //               contentPadding:
-  //                   EdgeInsets.zero, // 🔥 removes extra grey padding
+  //                   EdgeInsets.zero, // ðŸ”¥ removes extra grey padding
   //             ),
   //             style: const TextStyle(color: Colors.white, fontSize: 16),
   //             cursorColor: Colors.white,
@@ -298,7 +298,7 @@ class HomeScreen extends StatelessWidget {
         builder: (context, state) {
           final properties = state.filteredProperties;
           if (properties.isEmpty) {
-            return const Center(child: Text('No properties found'));
+            return const Center(child: Text('No projects found'));
           }
           return ListView.builder(
             scrollDirection: Axis.horizontal,

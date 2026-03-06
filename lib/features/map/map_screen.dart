@@ -72,8 +72,8 @@ class _MapScreenState extends State<MapScreen> {
       SnackBar(
         content: Text(
           _isNearbyActive
-              ? 'Nearby properties visible (5km radius)'
-              : 'Showing all properties',
+              ? 'Nearby projects visible (5km radius)'
+              : 'Showing all projects',
         ),
         duration: const Duration(seconds: 2),
         behavior: SnackBarBehavior.floating,
