@@ -125,12 +125,12 @@ class DesignProject extends Equatable {
     'ownerId': ownerId,
     'ownerPhotoUrl': ownerPhotoUrl, // Added
     'address': address,
-    'beds': roomCount,
-    'baths': style,
-    'sqft': budget,
-    'hasKitchen': isCompleted,
-    'agentName': designerName,
-    'agentPhone': designerPhone,
+    'roomCount': roomCount,
+    'style': style,
+    'budget': budget,
+    'isCompleted': isCompleted,
+    'designerName': designerName,
+    'designerPhone': designerPhone,
     'gallery': gallery,
   };
 
@@ -145,12 +145,15 @@ class DesignProject extends Equatable {
     type: json['type'] ?? '',
     ownerId: json['ownerId'],
     address: json['address'],
-    roomCount: json['beds'] ?? 0,
-    style: json['baths'] ?? 0,
-    budget: (json['sqft'] as num?)?.toDouble() ?? 0.0,
-    isCompleted: json['hasKitchen'] ?? false,
-    designerName: json['agentName'] ?? '',
-    designerPhone: json['agentPhone'] ?? '',
+    roomCount: json['roomCount'] ?? json['beds'] ?? 0,
+    style: json['style']?.toString() ?? json['baths']?.toString() ?? 'Modern',
+    budget:
+        (json['budget'] as num?)?.toDouble() ??
+        (json['sqft'] as num?)?.toDouble() ??
+        0.0,
+    isCompleted: json['isCompleted'] ?? json['hasKitchen'] ?? false,
+    designerName: json['designerName'] ?? json['agentName'] ?? '',
+    designerPhone: json['designerPhone'] ?? json['agentPhone'] ?? '',
     gallery: List<String>.from(json['gallery'] ?? []),
     ownerPhotoUrl: json['ownerPhotoUrl'], // Added
   );
