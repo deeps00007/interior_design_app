@@ -58,3 +58,6 @@ firebase_options.dart # Optional: if you want to keep API keys private
 .env
 backend/.env
 backend/serviceAccountKey.json
+
+# Ignore lib folder per user request
+/lib/
