@@ -45,21 +45,15 @@ service cloud.firestore {
     
     // Notifications collection
     match /notifications/{notificationId} {
-      // Users can read notifications for them
-      allow read: if isSignedIn() && 
-                    resource.data.userId == request.auth.uid;
+      // All signed-in users can read notifications (used for global broadcasts)
+      allow read: if isSignedIn();
       
       // Only server/admin can create notifications (via backend)
-      // For now, allowing authenticated users to create
+      // For now, allowing authenticated users to create (or admins)
       allow create: if isSignedIn();
       
-      // Users can update their own notifications (e.g., mark as read)
-      allow update: if isSignedIn() && 
-                      resource.data.userId == request.auth.uid;
-      
-      // Users can delete their own notifications
-      allow delete: if isSignedIn() && 
-                      resource.data.userId == request.auth.uid;
+      // Users can update/delete notifications
+      allow update, delete: if isSignedIn();
     }
   }
 }
