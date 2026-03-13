@@ -55,5 +55,17 @@ service cloud.firestore {
       // Users can update/delete notifications
       allow update, delete: if isSignedIn();
     }
+
+    // Meetings collection
+    match /meetings/{meetingId} {
+      // Users can read meetings if they are the client or designer
+      allow read: if isSignedIn() && (resource.data.clientId == request.auth.uid || resource.data.designerId == request.auth.uid);
+      
+      // Any authenticated user can schedule (create) a meeting
+      allow create: if isSignedIn() && request.resource.data.clientId == request.auth.uid;
+      
+      // Only involved parties can update/cancel a meeting
+      allow update, delete: if isSignedIn() && (resource.data.clientId == request.auth.uid || resource.data.designerId == request.auth.uid);
+    }
   }
 }
